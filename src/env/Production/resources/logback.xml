@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE logback>
+<configuration>
+
+  <property name="LOG_DIR" value="/logs/" />
+  <property name="FILE_NAME" value="" />
+  <property name="FORMAT1" value="%d{yyyy/MM/dd HH:mm:ss.SSS} %highlight[%-5p] %C::%M(%L) - %m%n" />
+  <property name="FORMAT2" value="%d{yyyy/MM/dd HH:mm:ss.SSS} [%-5p] %C::%M(%L) - %m%n" />
+  <!--
+    %d{date pattern} 日付
+    %c{length}       ロギングイベント生成する一番元になったロガーの名前
+    %C{length}       ロギング要求を生成した呼び出し元のクラスの完全名
+    %F               ロギング要求を発行したクラスのソースコードファイル名
+    %caller{depth}   ロギングイベントを生成した呼び出し元の位置情報(スタックの深さ、ソースコードファイルの行番号)
+    %L               ロギング要求を生成したソースコードファイル中の行番号
+    %m               アプリケーションがロギングイベントに関連づけたメッセージ
+    %M               ロギング要求が生成されたメソッド名
+    %n               プラットフォーム依存の改行文字
+    %p               ロギングイベントのレベル
+    %t               ロギングイベントを生成したスレッドの名前
+  -->
+
+  <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>${FORMAT1}</pattern>
+    </encoder>
+  </appender>
+
+  <appender name="LOGFILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>${LOG_DIR}${FILE_NAME}.log</file>
+    <append>true</append>
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <fileNamePattern>${LOG_DIR}${FILE_NAME}.%d{yyyy-MM-dd}.log</fileNamePattern>
+      <maxHistory>30</maxHistory>
+    </rollingPolicy>
+    <encoder>
+      <pattern>${FORMAT2}</pattern>
+    </encoder>
+  </appender>
+
+  <logger name="jp.co.jmas.ark.web.api" level="DEBUG">
+    <appender-ref ref="LOGFILE" />
+  </logger>
+  <logger name="jp.co.jmas.ark.commons" level="DEBUG">
+    <appender-ref ref="LOGFILE" />
+  </logger>
+
+  <root level="DEBUG">
+    <appender-ref ref="CONSOLE" />
+    <appender-ref ref="LOGFILE" />
+  </root>
+
+</configuration>
+

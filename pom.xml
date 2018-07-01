@@ -1,0 +1,96 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>jp.co.jmas.ark</groupId>
+    <artifactId>ark-parent</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  <artifactId>ark-webapi-blank</artifactId>
+  <packaging>war</packaging>
+
+  <properties>
+    <ark-commons.version>0.0.1-SNAPSHOT</ark-commons.version>
+  </properties>
+
+  <dependencies>
+
+    <dependency>
+      <groupId>jp.co.jmas.ark</groupId>
+      <artifactId>ark-commons</artifactId>
+      <version>${ark-commons.version}</version>
+    </dependency>
+
+  </dependencies>
+
+  <profiles>
+    <profile>
+      <id>MUT</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <build>
+        <resources>
+          <resource>
+            <directory>src/env/MUT/resources</directory>
+          </resource>
+          <resource>
+            <directory>src/main/resources</directory>
+          </resource>
+        </resources>
+      </build>
+    </profile>
+    <profile>
+      <id>ITa</id>
+      <build>
+        <resources>
+          <resource>
+            <directory>src/env/ITa/resources</directory>
+          </resource>
+          <resource>
+            <directory>src/main/resources</directory>
+          </resource>
+        </resources>
+      </build>
+    </profile>
+    <profile>
+      <id>ITb</id>
+      <build>
+        <resources>
+          <resource>
+            <directory>src/env/ITb/resources</directory>
+          </resource>
+          <resource>
+            <directory>src/main/resources</directory>
+          </resource>
+        </resources>
+      </build>
+    </profile>
+    <profile>
+      <id>Staging</id>
+      <build>
+        <resources>
+          <resource>
+            <directory>src/env/Staging/resources</directory>
+          </resource>
+          <resource>
+            <directory>src/main/resources</directory>
+          </resource>
+        </resources>
+      </build>
+    </profile>
+    <profile>
+      <id>Production</id>
+      <build>
+        <resources>
+          <resource>
+            <directory>src/env/Production/resources</directory>
+          </resource>
+          <resource>
+            <directory>src/main/resources</directory>
+          </resource>
+        </resources>
+      </build>
+    </profile>
+  </profiles>
+
+</project>
